@@ -58,7 +58,7 @@ export const login = async (req, res) => {
   try {
     const user = await prisma.user.findUnique({ where: { username } });
     if (!user) {
-      log.warn(`Login failed: User not found ❌ username: ${username}`);
+      log.warn(`Login failed: User not found ❌ username: ${username} ,${password}`);
       return res.status(404).json({ error: "User Not Found" });
     }
 

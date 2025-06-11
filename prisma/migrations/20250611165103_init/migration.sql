@@ -1,6 +1,7 @@
 -- CreateTable
 CREATE TABLE "Song" (
     "id" TEXT NOT NULL,
+    "spotifyTrackID" TEXT NOT NULL,
     "title" TEXT NOT NULL,
 
     CONSTRAINT "Song_pkey" PRIMARY KEY ("id")
@@ -25,7 +26,7 @@ CREATE TABLE "Thread" (
     "content" TEXT NOT NULL,
     "timestamp" TEXT NOT NULL,
     "authorId" TEXT NOT NULL,
-    "songId" TEXT NOT NULL,
+    "spotifySongID" TEXT NOT NULL,
     "parentId" TEXT,
 
     CONSTRAINT "Thread_pkey" PRIMARY KEY ("id")
@@ -41,6 +42,9 @@ CREATE TABLE "Like" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Song_spotifyTrackID_key" ON "Song"("spotifyTrackID");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- CreateIndex
@@ -53,7 +57,7 @@ CREATE UNIQUE INDEX "Like_userId_threadId_key" ON "Like"("userId", "threadId");
 ALTER TABLE "Thread" ADD CONSTRAINT "Thread_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Thread" ADD CONSTRAINT "Thread_songId_fkey" FOREIGN KEY ("songId") REFERENCES "Song"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Thread" ADD CONSTRAINT "Thread_spotifySongID_fkey" FOREIGN KEY ("spotifySongID") REFERENCES "Song"("spotifyTrackID") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Thread" ADD CONSTRAINT "Thread_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "Thread"("id") ON DELETE SET NULL ON UPDATE CASCADE;

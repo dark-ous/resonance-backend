@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Song {
+  id      String   @id @default(cuid())
+  spotifyTrackID String   @unique
+  title   String
+  threads Thread[] //top-lvl cmts 
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  username  String   @unique
+  email     String   @unique
+  password  String
+  threads   Thread[]
+  likes     Like[]
+  createdAt DateTime @default(now())
+}
+
+model Thread {
+  id        String @id @default(cuid())
+  username  String
+  content   String
+  timestamp String
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+
+  spotifySongID String
+  song   Song?  @relation(fields: [spotifySongID], references: [spotifyTrackID])
+
+  parentId String?
+  parent   Thread?  @relation("ThreadToReplies", fields: [parentId], references: [id])
+  replies  Thread[] @relation("ThreadToReplies")
+
+  likes Like[]
+}
+
+model Like {
+  id       String @id @default(cuid())
+  userId   String
+  user     User   @relation(fields: [userId], references: [id])
+  threadId String
+  thread   Thread @relation(fields: [threadId], references: [id])
+
+  @@unique([userId, threadId])
+}

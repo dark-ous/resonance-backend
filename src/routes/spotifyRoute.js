@@ -1,6 +1,5 @@
 import express from 'express'
 const router = express.Router();
-import {isAuth} from  "../middleware/isAuth.js"
 import { getSpotifySongsBySearch } from '../../services/spotifyServices.js';
 
 

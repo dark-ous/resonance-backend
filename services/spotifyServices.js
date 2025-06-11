@@ -61,6 +61,7 @@ export const getSpotifySongData = async (songID) => {
       artist: data.artists.map((a) => a.name).join(", "),
       album: data.album.name,
       image: data.album.images?.[0]?.url || null,
+      
     };
   } catch (error) {
     console.error(
@@ -101,6 +102,7 @@ export const getSpotifySongsBySearch = async (req, res) => {
       name: track.name,
       artist: track.artists[0].name,
       image: track.album.images[0]?.url || null,
+      url:track.external_urls.spotify,
     }));
 
     return res.status(200).json({ tracks: simplifiedTracks });

@@ -11,7 +11,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://resonancearc.netlify.app/",
+    origin: process.env.BASE_URL,
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,

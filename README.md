@@ -1,6 +1,8 @@
 # Resonance Backend
 
-Backend service for **Resonance**, a discussion / interaction platform focused on threads, comments, and real-time engagement.
+🔗 **Project:** https://resonance-ous.netlify.in
+
+Backend service for the Resonance platform, providing APIs for authentication, threads, comments, and core data operations using Node.js, Express, Prisma, and PostgreSQL.
 
 This repository contains the **server-side logic**, database layer, and API implementation.
 

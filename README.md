@@ -1,6 +1,6 @@
 # Resonance Backend
 
-🔗 **Project:** https://resonance-ous.netlify.in
+🔗 **Project:** https://resonancearc.netlify.app/
 
 Backend service for the Resonance platform, providing APIs for authentication, threads, comments, and core data operations using Node.js, Express, Prisma, and PostgreSQL.
 

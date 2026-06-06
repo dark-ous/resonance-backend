@@ -17,7 +17,7 @@ export const isAuth = (req, res, next) => {
 
     next();
   } catch (err) {
-    console.error("Jwt Verification Error", error);
+    console.error("Jwt Verification Error", err);
     return res.status(401).json({ error: "Invalid or Expired Token" });
   }
 };
